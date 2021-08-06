@@ -7,8 +7,8 @@ Aprenderemos cómo utilizar docker en nuestros proyectos, estandarizando los amb
 ## Tabla de contenido
 * [Docker](#docker)
 * [Funcionamiento de Docker](#funcionamiento-de-docker)
-* [Mejores practicas](#mejores-practicas)
 * [Docker compose](#docker-compose)
+* [Mejores practicas](#mejores-practicas)
 * [Docker swarm](#docker-swarm)
 * [Referencias](#referencias)
 
@@ -16,7 +16,7 @@ Aprenderemos cómo utilizar docker en nuestros proyectos, estandarizando los amb
 
 [Docker](https://docs.docker.com/) permite estandarizar los entornos de ejecución de nuestras aplicaciones, encapsulando las librerias y dependencias dentro de un entorno controlado, dandonos la certeza que nuestro código se ejecutará igual en cualquier entorno con docker instalado en el que se ejecute.
 
-Docker es un sistema operativo (o runtime) que nos permite empaquetar software en unidades estandarizadas llamadas contenedores y nos proporciona un conjunto sencillo de comandos para administrarlos. 
+Docker es un sistema operativo (o runtime) multi plataforma que nos permite empaquetar software en unidades estandarizadas llamadas contenedores y nos proporciona un conjunto sencillo de comandos para administrarlos. 
 
 ![VM vs Docker](./assets/1.png)
 
@@ -55,6 +55,7 @@ RUN apt-get update
 RUN apt-get install –y mysql
 CMD echo "My first image created."
 ```
+
 Cada línea de nuestro Dockerfile será interpretada y generará una imagen intermedia en cache.
 
 **Comandos básicos del Dockerfile**
@@ -97,14 +98,19 @@ docker logs
 docker exec
 ```
 
-→ [Practica 1. Hello world](./practica_1/README.md)
+→ [Practica 1. Hello world](./ejercicios/E01/README.md)
 
-→ [Practica 2. Dockerfile](./practica_2/README.md)
+→ [Practica 2. Dockerfile](./ejercicios/E02/README.md)
 
-→ [Practica 3. Docker pull](./practica_3/README.md)
+→ [Practica 3. Docker pull](./ejercicios/E03/README.md)
+
+## Docker compose
+
+**docker compose** es una herramienta de docker que nos permite usar archivos `*.yaml` (`docker-compose.yml`) para  definir como se ejecutaran los contenedores requeridos por nuestra aplicación (basada en servicios) facilitando la forma en la que se ejecutan.
+
+→ [Practica 4. docker-compose.yml](./ejercicios/E04/README.md)
 
 ## Mejores practicas
-
 * Generar contenedores efimeros
 * Utilizar en lo posible imágenes oficiales 
 * Entender el contexto de construcción (build)
@@ -118,13 +124,6 @@ docker exec
 * Evitar el uso del usuario root en comandos donde sea posible
 
 → [Mejores practicas para escribir Dockerfile's](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
-
-
-## Docker compose
-
-**docker compose** es una herramienta de docker que nos permite usar archivos `*.yaml` (`docker-compose.yml`) para  definir como se ejecutaran los contenedores requeridos por nuestra aplicación (basada en servicios) facilitando la forma en la que se ejecutan.
-
-→ [Practica 4. docker-compose.yml](./practica_4/README.md)
 
 ## Docker swarm
 
@@ -141,7 +140,7 @@ Existen  dos tipos de nodos:
 
 ![docker swarm arch](./assets/4.png)
 
-→ [Practica 5. docker swarm](./practica_4/README.md)
+→ [Practica 5. docker swarm](./ejercicios/E04/README.md)
 
 ## Referencias
 
