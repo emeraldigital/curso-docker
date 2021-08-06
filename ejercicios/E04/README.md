@@ -1,72 +1,67 @@
-10. Caso práctico 4
-**Objetivo:** Revisar estructura de Dockerfile y ejecutar múltiples contenedores usando una archivo `docker-compose.yml`
+# Ejercicio 4. Docker compose
+
+## Objetivo
+
+Retomar el ejercicio para agilizar la generación de los servicios usando docker compose.
+
+## Instrucciones
+
+En el ejercicio anterior levantamos los contenedores de manera manual, cuando manejamos pocos servicios es relativamente sencillo manejar los comandos pero si la arquitectura de nuestra aplicación crece el mantener los comandos puede ser algo complicado.
+
+Docker nos facilita esa tarea con la herramienta docker compose.
+
+Crearemos un achivo llamado `docker-compose.yml` con el siguiente contenido.
 
 ```docker
-FROM tiangolo/uvicorn-gunicorn-fastapi:python3.7
-# Allow statements and log messages to immediately appear in the Knative logs
+version: '3.1'
 
-WORKDIR /app
-COPY requirements.txt requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
-
-ENV PYTHONUNBUFFERED True
-ENV DB_HOST=postgres
-ENV DB_PORT=5432
-ENV DB_NAME=educafin
-ENV DB_USER=postgres
-ENV DB_PASSWORD=123abc
-
-COPY . .
-
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
-```
-
-```docker
-# Build imagen del backend
-docker build -t educafin-backend .
-```
-
-```docker
-# Ejecutar contenedor del backend
-docker build -t educafin-backend --restart=always -p 8000 .
-```
-
-```docker
-version: '3'
 services:
-  postgres:
-    container_name: educafin-database
-    image: postgres
-    env_file:
-      - ./.env
-    volumes:
-      - ./data/postgres:/var/lib/postgresql/data
-    ports:
-      - ${POSTGRES_PORT}:5432
-    expose:
-      - ${POSTGRES_PORT}
-    environment:
-      POSTGRES_PASSWORD: ${POSTGRES_PASS}
-      POSTGRES_DB: ${POSTGRES_DATABASE}
 
-  educafin:
-    container_name: educafin-api
-    build: ./
-    volumes:
-      - ./:/app
+  wordpress:
+    container_name: wordpress
+    image: wordpress
     restart: always
-    depends_on:
-      - postgres
     ports:
-    - 8000:8000
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+    volumes:
+      - ./html:/var/www/html
+
+  mysql:
+    container_name: mysql
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
 ```
 
-```docker
-docker-compose up
-# Podemos definir el archivo yml para correr los servicios con docker-compose 
-# docker-compose <-f filename.yml> up
+Y simplificaremos nuestro archivo con variables de ambiente para administrarlas mejor:
+
+```bash
+MYSQL_ROOT_PASSWORD=123abc
+MYSQL_DATABASE=wordpress-blog
+MYSQL_USER=test
+MYSQL_PASSWORD=123abc
 ```
 
-```docker
-docker-compose down
+Ejecutaremos el comando:
+
+```bash
+$ docker compose up
 ```
+
+## Conclusion
+
+Docker compose nos permite administrar de mejor manera la ejecución de los servicios contenerizados de nuestra apliación.
