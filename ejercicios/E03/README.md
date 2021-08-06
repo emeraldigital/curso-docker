@@ -92,7 +92,7 @@ WORDPRESS_DB_NAME=wordpress-blog
 Elimina los contenedores anteriores y correlos de nuevo pero usando el archivo de variables de ambiente.
 
 ```docker
-$ docker run --rm --name mysql --network wordpress-blog -p 3306:3306 -v mysql:/var/lib/mysql --env-file .env mysql
+$ docker run --name mysql --restart=always --network wordpress-blog -p 3306:3306 -v mysql:/var/lib/mysql --env-file .env mysql
 ```
 
 ```docker
@@ -101,9 +101,11 @@ $ docker run --rm --name wordpress --network wordpress-blog -p 8080:80 -v "$PWD/
 
 ## Conclusion
 
-Descargamos imagenes de docker hub y creamos contenedores a partir de ellas.
+Descargamos imagenes de docker hub y creamos contenedores a partir de ellas personalizando su ejecución por medio de variables de ambiente.
 
-Aprendimos los conceptos de: `volume`, `network`, `enviroment`, `port`.
+Aprendimos a darle persistencia a nuestros contenedores usando `volume`, interconectamos nuestros servicios a traves de `network` y expusimos puertos con `port`.
 
-La opcion `--rm` nos permite crear contenedores que se eliminen al terminar su ejecución.
+* La opcion `--rm` nos permite crear contenedores que se eliminen al terminar su ejecución.
+
+* La opcion `--restart=always` nos permite crear contenedores que se reinicien en caso de detenerse.
 

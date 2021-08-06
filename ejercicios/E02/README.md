@@ -55,7 +55,7 @@ echo Hello world!
 ls -la
 ```
 
-Asegurate de tener ambos archivos en el mismo directorio (contexto) y construye la imagen asignando un nombre y utilizando el Dockerfile recien creado.
+Asegurate de tener ambos archivos en el mismo directorio (contexto) y construye la imagen asignando un tag y utilizando el Dockerfile recien creado.
 
 ```bash
 $ docker build -t hello:2.0 -f Dockerfile2 .
@@ -84,11 +84,20 @@ Dockerfile*
 README.md
 ```
 
-Si volvemos a generar la imagen y corremos el contenedor la salida habra cambiado algo similar a:
+Si volvemos a generar la imagen y corremos el contenedor..
 
 ```bash
-$docker build -t hello:3.0 -f Dockerfile2 . && docker run hello:3.0 
-[+] Building 0.5s (9/9) FINISHED                                                                              # Docker build output
+$ docker build -t hello:3.0 -f Dockerfile2 . 
+```
+
+```bash
+$ docker run hello:3.0 
+```
+la salida habra cambiado algo similar a:
+
+```bash
+[+] Building 0.5s (9/9) FINISHED                                                                              
+# Docker build output
 Hello world!
 total 16
 drwxr-xr-x 1 root root 4096 Aug  6 16:47 .

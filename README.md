@@ -140,10 +140,4 @@ Existen  dos tipos de nodos:
 
 ![docker swarm arch](./assets/4.png)
 
-→ [Practica 5. docker swarm](./ejercicios/E04/README.md)
-
-## Referencias
-
-* [Todo lo que debe saber sobre Docker Hub](https://geekflare.com/es/docker-hub-introduction)
-* [docker run](https://superadmin.es/blog/que-es/docker-run/)
-* [Orquestación de Contenedores](https://blog.techdata.com/ts/latam/orquestaci%C3%B3n-de-contenedores)
+→ [Practica 5. docker swarm](./ejercicios/E05/README.md)
