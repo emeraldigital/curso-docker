@@ -1,8 +1,8 @@
 # Fundamentos de Docker (Contenedores)
 
-    Este curso tiene como objetivo introducirnos de forma práctica y sencilla a la técnologia de contenerización Docker.
+Este curso tiene como objetivo introducirnos de forma práctica y sencilla a la técnologia de contenerización Docker.
     
-    Aprenderemos cómo utilizar docker en nuestros proyectos, estandarizando los ambientes de ejecución para los colaboradores de los proyecto y facilitando la implementación y escalamiento.
+Aprenderemos cómo utilizar docker en nuestros proyectos, estandarizando los ambientes de ejecución para los colaboradores de los proyecto y facilitando la implementación y escalamiento.
 
 ## Tabla de contenido
 * [Docker](#docker)
@@ -17,6 +17,8 @@
 [Docker](https://docs.docker.com/) permite estandarizar los entornos de ejecución de nuestras aplicaciones, encapsulando las librerias y dependencias dentro de un entorno controlado, dandonos la certeza que nuestro código se ejecutará igual en cualquier entorno con docker instalado en el que se ejecute.
 
 Docker es un sistema operativo (o runtime) que nos permite empaquetar software en unidades estandarizadas llamadas contenedores y nos proporciona un conjunto sencillo de comandos para administrarlos. 
+
+![VM vs Docker](./assets/1.png)
 
 A diferencia de una maquina virtual (VM), los contenedores virtualizan únicamente el software, ademas que cada contenedor contiene únicamente lo necesario para que el software se ejecute (bibliotecas, herramientas de sistema y el código fuente). Esto permite que los contenedores sean más ligeros que las maquinas virtuales.
 
@@ -36,6 +38,8 @@ Es una plataforma similar a github donde podemos:
 Podemos resumir el funcionamiento de docker en 3 elementos y dos procesos.
 
 Dockerfile → ```docker build``` → Imagen → ```docker run``` → Contenedor
+
+![Elementos de Docker](./assets/2.png)
 
 ### Dockerfile
 
@@ -128,10 +132,14 @@ Es una herramienta para orquestar contenedores en clústers. Un clúster de swar
 
 Cada nodo ejecutará los servicios contenerizados en las replicas indicadas, permitiendo escalar de forma sencilla nuestras aplicaciones.
 
+![docker swarm](./assets/3.png)
+
 Existen  dos tipos de nodos:
 
 * Manager → realizan la orquestación y la administración del clúster. 
 * Worker → reciben y ejecutan tareas desde los nodos de administración.
+
+![docker swarm arch](./assets/4.png)
 
 → [Practica 5. docker swarm](./practica_4/README.md)
 
